@@ -1,0 +1,581 @@
+{
+  "ApplicationName": "LoanAgreement",
+  "DisplayName": "Loan Agreement Process",
+  "Description": "Online Loan Verification through Blockchain",
+  "ApplicationRoles": [
+    {
+      "Name": "Creator",
+      "Description": "User who will create the Loan trans"
+    },
+    {
+      "Name": "Bank",
+      "Description": "Borrower that enters unique key"
+    },
+    {
+      "Name": "Broker",
+      "Description": "User who will request the Loan"
+    }
+  ],
+  "Workflows": [
+    {
+      "Name": "LoanAgreement",
+      "DisplayName": "Loan Creation",
+      "Description": "Enter the details and do manual Verification",
+      "Initiators": [
+        "Creator"
+      ],
+      "StartState": "Active",
+      "Properties": [
+        {
+          "Name": "State",
+          "DisplayName": "State",
+          "Description": "Holds the state of the contract",
+          "Type": {
+            "Name": "state"
+          }
+        },
+        {
+          "Name": "TaxPayerID",
+          "DisplayName": "Tax Payer Id",
+          "Description": "Describes the Tax Payer ID of customer",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "LoanId",
+          "DisplayName": "Loan Id",
+          "Description": "Describes the Loan Id of Borrower",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "InterestRate",
+          "DisplayName": "Interest Rate",
+          "Description": "Describes the current Interest Rate",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "PrincAmt",
+          "DisplayName": "Principal Amount",
+          "Description": "Describes the Principal amount borrowed",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "Unkey",
+          "DisplayName": "Unique Key",
+          "Description": "Describes the Unique key of customer",
+          "Type": {
+            "Name": "string"
+          }
+        },
+        {
+          "Name": "InstanceCreator",
+          "DisplayName": "Instance Creator",
+          "Description": "user that creates Loan",
+          "Type": {
+            "Name": "Creator"
+          }
+        },
+        {
+          "Name": "InstanceBroker",
+          "DisplayName": "Instance Broker",
+          "Description": "user that approves Loan",
+          "Type": {
+            "Name": "Broker"
+          }
+        },
+        {
+          "Name": "InstanceBank",
+          "DisplayName": "Instance Bank",
+          "Description": "user that initiates Loan",
+          "Type": {
+            "Name": "address"
+          }
+        }
+      ],
+      "Constructor": {
+        "Parameters": [
+          {
+            "Name": "bank",
+            "Description": "Person who initiates the Loan",
+            "DisplayName": "Bank",
+            "Type": {
+              "Name": "Bank"
+            }
+          },
+          {
+            "Name": "broker",
+            "Description": "Person who approves the Loan",
+            "DisplayName": "Broker",
+            "Type": {
+              "Name": "Broker"
+            }
+          },
+          {
+            "Name": "name",
+            "DisplayName": "Name",
+            "Description": "Holds the name of Creator",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "loanId",
+            "DisplayName": "Loan Id",
+            "Description": "Describes the Loan Id of Creator",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "_Tin",
+            "DisplayName": "Tax payer ID",
+            "Description": "Describes the Tax Payer ID of customer",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "interest",
+            "DisplayName": "Interest Rate",
+            "Description": "Describes the Interest Rate of customer",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "princamt",
+            "DisplayName": "Principal Amount",
+            "Description": "Describes the Principal Amount of customer",
+            "Type": {
+              "Name": "string"
+            }
+          },
+          {
+            "Name": "unkey",
+            "DisplayName": "Unique Key",
+            "Description": "Describes the Unique Key of customer",
+            "Type": {
+              "Name": "string"
+            }
+          }
+        ]
+      },
+      "Functions": [
+        {
+          "Name": "Modify",
+          "DisplayName": "Modify",
+          "Description": "Modify the Details of the Creator",
+          "Parameters": [
+            {
+              "Name": "broker",
+              "Description": "Person who approves the Loan",
+              "DisplayName": "Broker",
+              "Type": {
+                "Name": "address"
+              }
+            },
+            {
+              "Name": "name",
+              "DisplayName": "Name",
+              "Description": "Modify the name of Customer",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "_Tin",
+              "DisplayName": "Tax payer ID",
+              "Description": "Describes the Tax Payer ID of customer",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "princamt",
+              "DisplayName": "Principal Amount",
+              "Description": "Describes the Principal Amount of customer",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "interest",
+              "DisplayName": "Interest Rate",
+              "Description": "Describes the Interest Rate of customer",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "loanId",
+              "DisplayName": "Loan Id",
+              "Description": "Modify the Loan Id of Customer",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "unkey",
+              "DisplayName": "Unique key",
+              "Description": "Modify the Unique key of Customer",
+              "Type": {
+                "Name": "string"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Create",
+          "DisplayName": "Create",
+          "Description": "Create Loan",
+          "Parameters": [
+            {
+              "Name": "bank",
+              "DisplayName": "bank",
+              "Description": "Bank Name",
+              "Type": {
+                "Name": "address"
+              }
+            },
+            {
+              "Name": "broker",
+              "DisplayName": "broker",
+              "Description": "Broker Name",
+              "Type": {
+                "Name": "address"
+              }
+            },
+            {
+              "Name": "name",
+              "DisplayName": "Name",
+              "Description": "Customer Name",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "loanId",
+              "DisplayName": "Loan Id",
+              "Description": "Customer Loan Id",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "_Tin",
+              "DisplayName": "Tax payer ID",
+              "Description": "Describes the Tax Payer ID of customer",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "interest",
+              "DisplayName": "Interest Rate",
+              "Description": "Describes the Interest Rate of customer",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "princamt",
+              "DisplayName": "Principal Amount",
+              "Description": "Describes the Principal Amount of customer",
+              "Type": {
+                "Name": "string"
+              }
+            },
+            {
+              "Name": "unkey",
+              "DisplayName": "Unique key",
+              "Description": "Describes the Unique key of customer",
+              "Type": {
+                "Name": "string"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Reject",
+          "DisplayName": "Reject",
+          "Description": "Reject particular instance of Borrower detail",
+          "Parameters": []
+        },
+        {
+          "Name": "Terminate",
+          "DisplayName": "Terminate",
+          "Description": "Used to cancel this particular instance of Borrower detail",
+          "Parameters": []
+        },
+        {
+          "Name": "Verify",
+          "DisplayName": "Verify",
+          "Description": "Verify the Customer details",
+          "Parameters": [
+	{
+              "Name": "uniqueKey",
+              "DisplayName": "Unique key",
+              "Description": "Describes the Unique key of customer",
+              "Type": {
+              "Name": "address"
+              }
+	}
+	]
+        },
+        {
+          "Name": "Approve",
+          "DisplayName": "Approve",
+          "Description": "Approve the Loan",
+          "Parameters": []
+        },
+        {
+          "Name": "PendingCustomerSign",
+          "DisplayName": "PendingCustomerSign",
+          "Description": "Control Agreement sign pending",
+          "Parameters": []
+        },
+        {
+          "Name": "Signed",
+          "DisplayName": "Signed",
+          "Description": "Customer signs control Agreement",
+          "Parameters": []
+        },
+        {
+          "Name": "PendingApproval",
+          "DisplayName": "PendingApproval",
+          "Description": "Approval pending from Broker",
+          "Parameters": []
+        },
+        {
+          "Name": "Disburse",
+          "DisplayName": "Disburse",
+          "Description": "Disbursement of loan from Bank",
+          "Parameters": []
+        }
+      ],
+      "States": [
+        {
+          "Name": "Active",
+          "DisplayName": "Active",
+          "Description": "The initial state of the Loan Agreement",
+          "PercentComplete": 10,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": [
+                "Bank"
+              ],
+              "AllowedInstanceRoles": [
+                "InstanceBank"
+              ],
+              "Description": "Contract terminated",
+              "NextStates": [
+                "Terminated"
+              ],
+              "Function": "Reject",
+              "DisplayName": "Terminated"
+            },
+            {
+              "AllowedRoles": [
+                "Bank"
+              ],
+              "AllowedInstanceRoles": [
+                "InstanceBank"
+              ],
+              "Description": "Enter details of the Customer",
+              "Function": "Modify",
+              "NextStates": [
+                "Active"
+              ],
+              "DisplayName": "Modify"
+            },
+	    {
+              "AllowedRoles": [
+                "Bank"
+              ],
+              "AllowedInstanceRoles": [
+                "InstanceBank"
+              ],
+              "Description": "Submit Collateral Confirmation",
+              "NextStates": [
+                "Verified"
+              ],
+              "Function": "Verify",
+              "DisplayName": "Verify"
+            }
+          ]
+        },
+        {
+          "Name": "Verified",
+          "DisplayName": "Verified",
+          "Description": "The initial state of the Loan Agreement",
+          "PercentComplete": 25,
+          "Style": "Success",
+          "Transitions": [
+	     {
+              "AllowedRoles": [
+                "Bank"
+              ],
+              "AllowedInstanceRoles": [
+                "InstanceBank"
+              ],
+              "Description": "customer sign",
+              "NextStates": [
+                "PendingCustomerSign"
+              ],
+              "Function": "PendingCustomerSign",
+              "DisplayName": "PendingCustomerSign"
+            }
+          ]
+        },
+        {
+          "Name": "PendingCustomerSign",
+          "DisplayName": "PendingCustomerSign",
+          "Description": "Sign pending by customer",
+          "PercentComplete": 50,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": [
+                "Creator"
+              ],
+              "AllowedInstanceRoles": [
+                "InstanceCreator"
+              ],
+              "Description": "customer signed",
+              "NextStates": [
+                "Signed"
+              ],
+              "Function": "Signed",
+              "DisplayName": "Signed"
+            }
+          ]
+        },
+        {
+          "Name": "Signed",
+          "DisplayName": "Signed",
+          "Description": "Signed by Customer",
+          "PercentComplete": 75,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": [
+                "Creator"
+              ],
+              "AllowedInstanceRoles": [
+                "InstanceCreator"
+              ],
+              "Description": "Agreement Approval request",
+              "NextStates": [
+                "PendingApproval"
+              ],
+              "Function": "PendingApproval",
+              "DisplayName": "PendingApproval"
+            }
+          ]
+        },
+        {
+          "Name": "PendingApproval",
+          "DisplayName": "PendingApproval",
+          "Description": "Pending Approval by Broker",
+          "PercentComplete": 75,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": [
+                "Broker"
+              ],
+              "AllowedInstanceRoles": [
+                "InstanceBroker"
+              ],
+              "Description": "Contract terminated",
+              "NextStates": [
+                "Terminated"
+              ],
+              "Function": "Reject",
+              "DisplayName": "Terminated"
+            },
+            {
+              "AllowedRoles": [
+                "Broker"
+              ],
+              "AllowedInstanceRoles": [
+                "InstanceBroker"
+              ],
+              "Description": "Approved by Broker",
+              "NextStates": [
+                "Approved"
+              ],
+              "Function": "Approve",
+              "DisplayName": "Approved"
+            }
+          ]
+        },
+        {
+          "Name": "Approved",
+          "DisplayName": "Approved",
+          "Description": "Loan process is complete",
+          "PercentComplete": 90,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": ["Bank"],
+              "AllowedInstanceRoles": ["InstanceBank"],
+              "Description": "Contract terminated",
+	            "NextStates": ["Terminated"],
+	            "Function":"Reject",	
+              "DisplayName": "Terminated"
+            },
+            {
+              "AllowedRoles": [
+                "Bank"
+              ],
+              "AllowedInstanceRoles": [
+                "InstanceBank"
+              ],
+              "Description": "Disbursement of Loan by bank",
+              "NextStates": [
+                "Disbursed"
+              ],
+              "Function": "Disburse",
+              "DisplayName": "Disbursed"
+            }
+          ]
+        },
+        {
+          "Name": "Disbursed",
+          "DisplayName": "Disbursed",
+          "Description": "Loan process is complete",
+          "PercentComplete": 100,
+          "Style": "Success",
+          "Transitions": []
+        },
+	{
+          "Name": "Terminated",
+          "DisplayName": "Terminated",
+          "Description": "Loan Process has been cancelled",
+          "Function": "Reject",
+          "PercentComplete": 100,
+          "Style": "Failure",
+          "Transitions": []
+        },
+	{
+          "Name": "VerificationFailed",
+          "DisplayName": "VerificationFailed",
+          "Description": "Loan Process has been cancelled",
+          "Function": "Verify",
+          "PercentComplete": 100,
+          "Style": "Failure",
+          "Transitions": []
+        }
+      ]
+    }
+  ]
+}
