@@ -1,0 +1,240 @@
+ {
+  "ApplicationName": "BKYC",
+  "DisplayName": "BKYC",
+  "Description": "Online KYC Verification through Blockchain",
+  "ApplicationRoles": [
+    {
+      "Name": "Approver",
+      "Description": "User that will verify KYC verification 1st time"
+    },
+    {
+      "Name": "Creator",
+      "Description": "User who will create the KYC"
+    }  
+  ],
+
+  "Workflows": [
+    {
+      "Name": "BKYC",
+      "DisplayName": "KYC Creation",
+      "Description": "Enter the details and do manual Verification",
+      "Initiators": [ "Creator"],
+      "StartState":  "Active",
+      "Properties": [
+        {
+          "Name": "State",
+          "DisplayName": "State",
+          "Description": "Holds the state of the contract",
+          "Type": {
+          "Name": "state"
+          }
+        }, 
+        {
+          "Name": "Name",
+          "DisplayName": "Name",
+          "Description": "Holds the name of customer",
+          "Type": {
+          "Name": "string"
+          }
+        },
+        {
+          "Name": "TaxPayerID",
+          "DisplayName": "TaxPayerID",
+          "Description": "Describes the TaxPayerID of customer",
+          "Type": {
+          "Name": "string"
+          }
+        },
+        {
+          "Name": "InstanceCreator",
+          "DisplayName": "Instance Creator",
+          "Description": "user that creates KYC",
+          "Type": {
+          "Name": "Creator"
+          } 
+        },
+       {
+          "Name": "InstanceApprover",
+          "DisplayName": "Instance Approver",
+          "Description": "user that approves KYC",
+          "Type": {
+          "Name": "Approver"
+          } 
+        }
+     ],
+      "Constructor": {
+        "Parameters": [
+
+	 {
+              "Name": "approver",
+              "Description": "Person who approves the KYC",
+              "DisplayName": "Approver",
+              "Type": {
+              "Name": "Approver"
+              }
+            },
+
+          {
+          "Name": "name",
+          "DisplayName": "Name",
+          "Description": "Holds the name of customer",
+          "Type": {
+          "Name": "string"
+          }
+        },
+        {
+          "Name": "_Tin",
+          "DisplayName": "TaxPayerID",
+          "Description": "Describes the TaxPayerID of customer",
+          "Type": {
+            "Name": "string"
+          }
+        }
+      ]
+      },
+      "Functions": [
+        {
+          "Name": "Modify",
+          "DisplayName": "Modify",
+          "Description": "Modify the Details of the customers",
+          "Parameters": [
+           {
+              "Name": "approver",
+              "Description": "Person who approves the KYC",
+              "DisplayName": "Approver",
+              "Type": {
+              "Name": "Approver"
+              }
+            },
+            {
+          "Name": "name",
+          "DisplayName": "Name",
+          "Description": "Modify the name of customer",
+          "Type": {
+          "Name": "string"
+          }
+        },
+        {
+          "Name": "_Tin",
+          "DisplayName": "TaxPayerID",
+          "Description": "Modify the TaxPayerID of customer",
+          "Type": {
+            "Name": "string"
+          }
+        }
+        ]
+        },
+         {
+          "Name": "Create",
+          "DisplayName": "Create",
+          "Description": "Create KYC",
+          "Parameters": [
+           {
+              "Name": "approver",
+              "Description": "Person who approves the KYC",
+              "DisplayName": "Approver",
+              "Type": {
+                "Name": "Approver"
+              }
+            },
+            {
+          "Name": "name",
+          "DisplayName": "Name",
+          "Description": "Customer Name",
+          "Type": {
+          "Name": "string"
+          }
+        },
+        {
+          "Name": "_Tin",
+          "DisplayName": "TaxPayerID",
+          "Description": "Customer TaxPayerID",
+          "Type": {
+          "Name": "string"
+          }
+        }
+        ]
+        },
+        {
+          "Name": "Terminate",
+          "DisplayName": "Terminate",
+          "Description": "Used to cancel this particular instance of customer detail",
+          "Parameters": []
+        },
+        {
+          "Name": "Reject",
+          "DisplayName": "Disapprove",
+          "Description": "Reject the user's offer",
+          "Parameters": []
+        },
+       {
+          "Name": "Approve",
+          "DisplayName": "Approve",
+          "Description": "Approve the KYC",
+          "Parameters": []
+        }
+
+      ],
+
+      "States": [
+        {
+          "Name": "Active",
+          "DisplayName": "Active",
+          "Description": "The initial state of the KYC Verification",
+          "PercentComplete": 50,
+          "Style": "Success",
+          "Transitions": [
+            {
+              "AllowedRoles": [],
+              "AllowedInstanceRoles": [ "InstanceCreator" ],
+              "Description": "Enter details of the customers",
+              "Function": "Modify",
+              "NextStates": [ "Active" ],
+              "DisplayName": "Modify"
+            },
+           {
+              "AllowedRoles": ["Approver"],
+              "AllowedInstanceRoles": ["InstanceApprover"],
+              "Description": "Approve the KYC",
+              "Function": "Approve",
+              "NextStates": [ "Approved"],
+              "DisplayName": "Approve KYC"
+            },
+	          {
+              "AllowedRoles": ["Approver"],
+              "AllowedInstanceRoles": ["InstanceApprover"],
+              "Description": "Disapprove the KYC",
+              "Function": "Reject",
+              "NextStates": [ "Rejected"],
+              "DisplayName": "Disapprove KYC"
+            }
+          ]
+        },
+       	   {
+       	  "Name": "Approved",
+          "DisplayName": "Approved",
+          "Description": "KYC process is complete",
+          "PercentComplete": 100,
+          "Style": "Success",
+          "Transitions": []
+        },
+        {
+          "Name": "Terminated",
+          "DisplayName": "Terminated",
+          "Description": "KYC Process has been cancelled",
+          "PercentComplete": 100,
+          "Style": "Failure",
+          "Transitions": []
+        },
+        {
+          "Name": "Rejected",
+          "DisplayName": "Disapproved",
+          "Description": "KYC Process Rejected",
+          "PercentComplete": 100,
+          "Style": "Failure",
+          "Transitions": []
+        }
+      ]  
+    }
+  ]
+}
